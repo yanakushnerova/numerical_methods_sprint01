@@ -13,7 +13,71 @@
     <script src="js/script.js" defer></script>
 </head>
 <body>
-    <h1>Интегрирование и решение дифференциальных уравнений</h1>
+    <div class="container">
+        <div id="choise">
+            <h1>Solve integrals or differential equations</h1>
+            <div id="choise_buttons">
+                <button id="ch_integral">Integrals</button>    
+                <button id="ch_differential">Differential equations</button>
+            </div>           
+        </div>
+
+        <div id="integral">
+            <h1>Solve integrals</h1>
+            <div id="turn_back_button_int">
+                <button id="turn_back_int">Back to menu</button>
+            </div>   
+
+            <div id="choose_func_int">
+                <label for="func_int">Choose function: </label>
+                <select id="func_int">
+                    <option value="1">f(x)=exp⁡(-x)</option>
+                    <option value="2">f(x)=sin⁡(x)</option>
+                    <option value="3">f(x)=exp⁡(-x^2)</option>
+                    <option value="4">f(x)=exp⁡(-4x-х^3)</option>
+                </select>
+            </div>
+
+            <div id="choose_method_int">
+                <label for="method_int">Choose method: </label>
+                <select id="method_int">
+                    <option value="1">Left rectangle method</option>
+                    <option value="2">Rigth rectangle method</option>
+                    <option value="3">Middle rectangle method</option>
+                    <option value="4">Trapezoidal method</option>
+                    <option value="5">Parabolic method</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="differential">
+            <h1>Solve differential equations</h1>
+            <div id="turn_back_button_diff">
+                <button id="turn_back_diff">Back to menu</button>
+            </div>
+
+            <div id="choose_func_diff">
+                <label for="func_diff">Choose function: </label>
+                <select id="func_diff">
+                    <option value="1">y'=-x*y</option>
+                    <option value="2">y'=x+y</option>
+                    <option value="3">y'=(3-12^2)</option>
+                </select>
+            </div>
+
+            <div id="choose_method_diff">
+                <label for="method_diff">Choose method: </label>
+                <select id="method_diff">
+                    <option value="1">Euler method</option>
+                    <option value="2">Range-Kutta-2 method</option>
+                    <option value="3">Range-Kutta-3 method</option>
+                    <option value="4">Range-Kutta-4 method</option>
+                </select>
+            </div>
+        </div>
+
+
+    </div>
     
 </body>
 </html>
