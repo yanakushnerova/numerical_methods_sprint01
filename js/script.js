@@ -1,31 +1,3 @@
-// console.log("1")
-// console.log(leftRectangleMethod(function1, 0, 5, 100))
-// console.log(leftRectangleMethod(function2, 0, 5, 100))
-// console.log("2")
-// console.log(rightRectangleMethod(function1, 0, 5, 100))
-// console.log(rightRectangleMethod(function2, 0, 5, 100))
-// console.log("3")
-// console.log(middleRectangleMethod(function1, 0, 5, 100))
-// console.log(middleRectangleMethod(function2, 0, 5, 100))
-// console.log("4")
-// console.log(trapezoidalMethod(function1, 0, 5, 100))
-// console.log(trapezoidalMethod(function2, 0, 5, 100))
-// console.log("5")
-// console.log(parabolicMethod(function1, 0, 5, 128))
-// console.log(parabolicMethod(function2, 0, 5, 128))
-
-// console.log("---------------------------------------------")
-// console.log("1")
-// console.log(eulerMethod(function5, 1, 5, 1, 10))
-// console.log("2")
-// console.log(rungeKuttaMethod2(function5, 1, 5, 1, 10))
-// console.log("3")
-// console.log(rungeKuttaMethod3(function5, 1, 5, 1, 10))
-// console.log("4")
-// console.log(rungeKuttaMethod4(function5, 1, 5, 1, 10))
-// console.log("---------------------------------------------")
-
-
 const choise_page = document.getElementById("choise")
 const integral_page = document.getElementById("integral")
 const differential_page = document.getElementById("differential")
@@ -50,7 +22,7 @@ const info_int = document.createElement("div")
 info_int.setAttribute("id", "info_int")
 
 const info_diff = document.createElement("div")
-info_int.setAttribute("id", "info_diff")
+info_diff.setAttribute("id", "info_diff")
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("ch_integral").onclick = function() {
@@ -98,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById("table_int").onclick = function() {
         info_int.innerText = ""
+        info_int.innerText += "Comparing results of every method: "
 
         let func = func_int.value
         let a = parseFloat(begin_int.value)
@@ -143,16 +116,49 @@ document.addEventListener('DOMContentLoaded', function() {
         table.appendChild(first_tr)
         table.appendChild(second_tr)
         info_int.appendChild(table)
+        integral_page.appendChild(info_int)
     }
 
-    document.getElementById("solve_diff").onclick = function() {
+    document.getElementById("solve_diff").onclick = function() { 
+        info_diff.innerText = ""
+        info_diff.innerText += "Table: "
+        console.log(info_diff.innerText)
+
         let func = func_diff.value
         let method = method_diff.value
         let a = parseFloat(begin_diff.value)
         let b = parseFloat(end_diff.value)
         let n = parseInt(n_diff.value)
         let y0 = parseFloat(y0_diff.value)
-        console.log(func, "-----", method, "---", a, "-----", b, "-----", n, "----", y0)
+        
+        let result_x = findCoordinates(a, b, n)
+        let result_y = solveDifferential(func, method, a, b, n, y0)
+        console.log(result_x)
+        console.log(result_y)
+
+        let table = document.createElement("table")
+        let first_tr = document.createElement("tr")
+        let first = document.createElement("th")
+        first.innerText = "x"
+        first_tr.appendChild(first)
+        let second = document.createElement("th")
+        second.innerText = "y"
+        first_tr.appendChild(second)
+        table.appendChild(first_tr)
+        
+        for (let i = 0; i < result_y.length; i++) {
+            let temp = document.createElement("tr")
+            let temp1 = document.createElement("td")
+            temp1.innerText = result_x[i]
+            temp.appendChild(temp1)
+            let temp2 = document.createElement("td")
+            temp2.innerText = result_y[i]
+            temp.appendChild(temp2)
+            table.appendChild(temp)
+        }
+
+        info_diff.appendChild(table)
+        differential_page.appendChild(info_diff)
     }
 });
 
@@ -245,6 +251,74 @@ function solveIntegral(func, method, a, b, n) {
     return result
 }
 
-function solveDifferential() {
+function findCoordinates(a, b, n) {
+    let x = []
+    let step = (b - a) / n
 
+    for (let i = a + step; i <= b; i += step) {
+        x.push(i)
+    }
+
+    return x
+}
+
+function solveDifferential(func, method, a, b, n, y0) {
+    let result = []
+
+    if (a >= b) {
+        return "incorrect"
+    }
+
+    switch(func) {
+        case '1':
+            switch(method) {
+                case '1':
+                    result = eulerMethod(function5, a, b, y0, n)
+                    break
+                case '2': 
+                    result = rungeKuttaMethod2(function5, a, b, y0, n)
+                    break
+                case '3':
+                    result = rungeKuttaMethod3(function5, a, b, y0, n)
+                    break
+                case '4':
+                    result = rungeKuttaMethod4(function5, a, b, y0, n)
+                    break
+            }
+            break
+        case '2':
+            switch(method) {
+                case '1':
+                    result = eulerMethod(function6, a, b, y0, n)
+                    break
+                case '2': 
+                    result = rungeKuttaMethod2(function6, a, b, y0, n)
+                    break
+                case '3':
+                    result = rungeKuttaMethod3(function6, a, b, y0, n)
+                    break
+                case '4':
+                    result = rungeKuttaMethod4(function6, a, b, y0, n)
+                    break
+            }
+            break
+        case '3':
+            switch(method) {
+                case '1':
+                    result = leftRectangleMethod(function7, a, b, n)
+                    break
+                case '2': 
+                    result = rightRectangleMethod(function7, a, b, n)
+                    break
+                case '3':
+                    result = middleRectangleMethod(function7, a, b, n)
+                    break
+                case '4':
+                    result = trapezoidalMethod(function7, a, b, n)
+                    break
+            }
+            break
+    }
+
+    return result
 }
