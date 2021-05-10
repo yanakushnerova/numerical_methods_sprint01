@@ -23,6 +23,8 @@ info_int.setAttribute("id", "info_int")
 
 const info_diff = document.createElement("div")
 info_diff.setAttribute("id", "info_diff")
+const chart_diff = document.createElement("div")
+chart_diff.setAttribute("id", "chart_diff")
 
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById("ch_integral").onclick = function() {
@@ -121,8 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById("solve_diff").onclick = function() { 
         info_diff.innerText = ""
-        info_diff.innerText += "Table: "
-        console.log(info_diff.innerText)
+        chart_diff.innerText = ""
 
         let func = func_diff.value
         let method = method_diff.value
@@ -133,32 +134,57 @@ document.addEventListener('DOMContentLoaded', function() {
         
         let result_x = findCoordinates(a, b, n)
         let result_y = solveDifferential(func, method, a, b, n, y0)
-        console.log(result_x)
-        console.log(result_y)
 
-        let table = document.createElement("table")
-        let first_tr = document.createElement("tr")
-        let first = document.createElement("th")
-        first.innerText = "x"
-        first_tr.appendChild(first)
-        let second = document.createElement("th")
-        second.innerText = "y"
-        first_tr.appendChild(second)
-        table.appendChild(first_tr)
-        
-        for (let i = 0; i < result_y.length; i++) {
-            let temp = document.createElement("tr")
-            let temp1 = document.createElement("td")
-            temp1.innerText = result_x[i]
-            temp.appendChild(temp1)
-            let temp2 = document.createElement("td")
-            temp2.innerText = result_y[i]
-            temp.appendChild(temp2)
-            table.appendChild(temp)
+        if (result_y == "incorrect") {
+            info_diff.innerText = "Interval is incorrect, a >= b"
+        } else {
+            info_diff.innerText += "Table: "
+            let table = document.createElement("table")
+            let first_tr = document.createElement("tr")
+            let first = document.createElement("th")
+            first.innerText = "x"
+            first_tr.appendChild(first)
+            let second = document.createElement("th")
+            second.innerText = "y"
+            first_tr.appendChild(second)
+            table.appendChild(first_tr)
+            
+            for (let i = 0; i < result_y.length; i++) {
+                let temp = document.createElement("tr")
+                let temp1 = document.createElement("td")
+                temp1.innerText = result_x[i]
+                temp.appendChild(temp1)
+                let temp2 = document.createElement("td")
+                temp2.innerText = result_y[i]
+                temp.appendChild(temp2)
+                table.appendChild(temp)
+            }
+
+            info_diff.appendChild(table)
+
+            chart_diff.innerText = "Chart: "
+            let output_chart = document.createElement("canvas")
+            output_chart.setAttribute("id", "chart")
+            chart = new Chart(output_chart.getContext('2d'), {
+                type: 'line',
+                responsive:false,
+                maintainAspectRatio: false,
+                data: {
+                    labels: result_x,
+                    datasets: [{
+                        label: "y'",
+                        backgroundColor: 'rgb(231, 124, 235)',
+                        borderColor: 'rgb(231, 124, 235)',
+                        data: result_y
+                    }]
+                }
+            })
+
+            chart_diff.appendChild(output_chart)
         }
-
-        info_diff.appendChild(table)
+        
         differential_page.appendChild(info_diff)
+        differential_page.appendChild(chart_diff)
     }
 });
 
