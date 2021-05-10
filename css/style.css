@@ -2,14 +2,20 @@
     font-size: 20px;
 }
 
-button, select {
+button, select, input {
     font-size: 15px;
 }
 
-select {
+select, input {
     /* width: 150px; */
     height: 40px;
     margin-bottom: 10px;
+}
+
+input[type="number"] {
+    width: 50px;
+    height: 40px;
+    margin-right: 15px;
 }
 
 #choise, #integral, #differential{
@@ -47,4 +53,14 @@ h1 {
 
 #differential {
     display: none;
+}
+
+#solve_int, #table_int, #solve_diff, #table_diff {
+    width: 80px;
+    height: 40px;
+    margin-right: 15px;
+}
+
+#buttons_int, #buttons_diff {
+    display: flex;
 }
