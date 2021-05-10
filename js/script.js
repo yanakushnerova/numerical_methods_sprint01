@@ -63,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
         let result = solveIntegral(func, method, a, b, n)
         if (result == "incorrect") {
             info_int.innerText = "Interval is incorrect, a >= b"
+        } else if (result == "incorrectN") {
+            info_int.innerText = "N is incorrect"
         } else {
             info_int.innerText = "Result: I = " + result
         }
@@ -211,6 +213,9 @@ function solveIntegral(func, method, a, b, n) {
                     result = trapezoidalMethod(function1, a, b, n)
                     break
                 case '5':
+                    if (n % 2 != 0) {
+                        return "incorrectN"
+                    }
                     result = parabolicMethod(function1, a, b, n)
                     break
             }
@@ -230,6 +235,9 @@ function solveIntegral(func, method, a, b, n) {
                     result = trapezoidalMethod(function2, a, b, n)
                     break
                 case '5':
+                    if (n % 2 != 0) {
+                        return "incorrectN"
+                    }
                     result = parabolicMethod(function2, a, b, n)
                     break
             }
@@ -249,6 +257,9 @@ function solveIntegral(func, method, a, b, n) {
                     result = trapezoidalMethod(function3, a, b, n)
                     break
                 case '5':
+                    if (n % 2 != 0) {
+                        return "incorrectN"
+                    }
                     result = parabolicMethod(function3, a, b, n)
                     break
             }
@@ -268,6 +279,9 @@ function solveIntegral(func, method, a, b, n) {
                     result = trapezoidalMethod(function4, a, b, n)
                     break
                 case '5':
+                    if (n % 2 != 0) {
+                        return "incorrectN"
+                    }
                     result = parabolicMethod(function4, a, b, n)
                     break
             }
