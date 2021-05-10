@@ -96,6 +96,55 @@ document.addEventListener('DOMContentLoaded', function() {
         integral_page.appendChild(info_int)
     }
 
+    document.getElementById("table_int").onclick = function() {
+        info_int.innerText = ""
+
+        let func = func_int.value
+        let a = parseFloat(begin_int.value)
+        let b = parseFloat(end_int.value)
+        let n = parseInt(n_int.value)
+
+        let table = document.createElement("table")
+        let first_tr = document.createElement("tr")
+        let second_tr = document.createElement("tr")
+
+        let first = document.createElement("th")
+        first.innerText = "Left Rectangle"
+        first_tr.appendChild(first)
+        let second = document.createElement("th")
+        second.innerText = "Right Rectangle"
+        first_tr.appendChild(second)
+        let third = document.createElement("th")
+        third.innerText = "Middle Rectangle"
+        first_tr.appendChild(third)
+        let fourth = document.createElement("th")
+        fourth.innerText = "Trapezoidal"
+        first_tr.appendChild(fourth)
+        let fifth = document.createElement("th")
+        fifth.innerText = "Parabolic"
+        first_tr.appendChild(fifth)
+
+        let res1 = document.createElement("th")
+        res1.innerText = solveIntegral(func, '1', a, b, n)
+        second_tr.appendChild(res1)
+        let res2 = document.createElement("th")
+        res2.innerText = solveIntegral(func, '2', a, b, n)
+        second_tr.appendChild(res2)
+        let res3 = document.createElement("th")
+        res3.innerText = solveIntegral(func, '3', a, b, n)
+        second_tr.appendChild(res3)
+        let res4 = document.createElement("th")
+        res4.innerText = solveIntegral(func, '4', a, b, n)
+        second_tr.appendChild(res4)
+        let res5 = document.createElement("th")
+        res5.innerText = solveIntegral(func, '5', a, b, n)
+        second_tr.appendChild(res5)
+
+        table.appendChild(first_tr)
+        table.appendChild(second_tr)
+        info_int.appendChild(table)
+    }
+
     document.getElementById("solve_diff").onclick = function() {
         let func = func_diff.value
         let method = method_diff.value
