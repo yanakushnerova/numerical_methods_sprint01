@@ -7,7 +7,6 @@ button, select, input {
 }
 
 select, input {
-    /* width: 150px; */
     height: 40px;
     margin-bottom: 10px;
 }
@@ -35,13 +34,11 @@ div#choise_buttons button{
     margin-right: 15px;
     width: 200px;
     height: 50px;
-    /* border-radius: 10px; */
 }
 
 #turn_back_button_int, #turn_back_button_diff {
     margin-top: 10px;
     margin-bottom: 10px;
-    /* width: 100px; */
 }
 
 h1 {
@@ -97,11 +94,6 @@ div#turn_back_button_int button {
     width: 200px;
     height: 50px;
 }
-
-/* canvas {
-    width: 1000px !important;
-    height: 700px !important;
-} */
 
 canvas {
     max-width: 800px;
